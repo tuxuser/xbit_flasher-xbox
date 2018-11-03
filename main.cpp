@@ -607,7 +607,7 @@ bool XbitFlasher::ReadBank(int bank, uchar *output_data, int *num_bytes_read)
 	}
 
 	int offset = 0;
-	num_bytes_read = 0;
+	*num_bytes_read = 0;
 	for(int block = 0; block < block_count; ++block) {
 		printf("Reading block %i\n", start_block + block);
 		for(int sector = 0; sector < (BLOCK_SIZE / MAX_SECTOR_SIZE); sector++) {
@@ -618,7 +618,7 @@ bool XbitFlasher::ReadBank(int bank, uchar *output_data, int *num_bytes_read)
 				printf("Failed to read data!\n");
 				return false;
 			}
-			num_bytes_read += MAX_SECTOR_SIZE;
+			*num_bytes_read += MAX_SECTOR_SIZE;
 		}
 	}
 
