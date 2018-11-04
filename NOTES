@@ -1,0 +1,21 @@
+The X-BIT really seems to be a pile of garbage when it comes to its USB
+interface. I failed with the original software on a trusty old Pentium Pro
+with first gen USB (the machine has exactly one USB port!).
+
+Then I tried this tool on Linux on a shoddy HP laptop which also failed.
+8086:0f35 Intel Corporation Atom Processor Z36xxx/Z37xxx, Celeron N2000 Series USB xHCI (rev 0e)
+
+Next I thought maybe give AMD a try and connected the chip to an
+MSI GF615M-P33 V2(MS-7597) mainboard (some AM3 platform)
+It was one of these controllers:
+10de:03f1 NVIDIA Corporation MCP61 USB 1.1 Controller (rev a3)
+10de:03f2 NVIDIA Corporation MCP61 USB 2.0 Controller (rev a3)
+
+First try, the tool didn't recognize the modchip. Looking at dmesg, the
+'Manufacturer' field was read as 'ST Micrnics' (wow).
+After simply replugging the chip, it now read 'ST Microelectronics' and
+everything was fine. Formatting worked, flashing worked, everything
+was fine, which was a bit surprising because previous research brought
+up an old thread where it was claimed that nforce chipsets would be
+the worst when trying to deal with the X-BIT, and VIA chips were recommended
+instead.
