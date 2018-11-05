@@ -676,7 +676,7 @@ uchar XbitFlasher::CalculateBlockIndexForOffset(int offset)
 int XbitFlasher::GetStartblockForBank(int layout, int bank)
 {
 	int offset = 0;
-	for(int i=1; i <= bank; i++){
+	for(int i=1; i < bank; i++){
 		offset += GetSizeForBank(layout, i);
 	}
 	return CalculateBlockIndexForOffset(offset);
