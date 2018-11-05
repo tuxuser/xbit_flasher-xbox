@@ -504,7 +504,7 @@ bool XbitFlasher::EraseBank(int bank)
 	int res = 0;
 	int bank_size = GetSizeForBank(this->memory_layout_id, bank);
 	int current_block = GetStartblockForBank(this->memory_layout_id, bank);
-	int block_count = CalculateBlocksizeForOffset(bank_size);
+	int block_count = CalculateBlockIndexForOffset(bank_size);
 
 	if(IsDeviceWriteprotected()){
 		printf("Modchip is write-protected?!?! Try resetting it by replugging USB cable..\n");
@@ -539,7 +539,7 @@ bool XbitFlasher::FlashBank(int bank, uchar *input_data, int data_length)
 	int res = 0;
 	int bank_size = GetSizeForBank(this->memory_layout_id, bank);
 	int start_block = GetStartblockForBank(this->memory_layout_id, bank);
-	int block_count = CalculateBlocksizeForOffset(bank_size);
+	int block_count = CalculateBlockIndexForOffset(bank_size);
 
 	if(bank_size != data_length){
 		printf("BIOS size %i does not match bank size %i\n", data_length, bank_size);
@@ -593,7 +593,7 @@ bool XbitFlasher::ReadBank(int bank, uchar *output_data, int *num_bytes_read)
 	int res;
 	int bank_size = GetSizeForBank(this->memory_layout_id, bank);
 	int start_block = GetStartblockForBank(this->memory_layout_id, bank);
-	int block_count = CalculateBlocksizeForOffset(bank_size);
+	int block_count = CalculateBlockIndexForOffset(bank_size);
 
 	if(IsDeviceWriteprotected()){
 		printf("Modchip is write-protected?!?! Try resetting it by replugging USB cable..\n");
@@ -661,7 +661,7 @@ bool XbitFlasher::VerifyBank(int bank, uchar *input_data, int data_length)
 	return true;
 }
 
-uchar XbitFlasher::CalculateBlocksizeForOffset(int offset)
+uchar XbitFlasher::CalculateBlockIndexForOffset(int offset)
 {
 	if(offset == 0){
 		return 0;
@@ -679,7 +679,7 @@ int XbitFlasher::GetStartblockForBank(int layout, int bank)
 	for(int i=1; i <= bank; i++){
 		offset += GetSizeForBank(layout, i);
 	}
-	return CalculateBlocksizeForOffset(offset);
+	return CalculateBlockIndexForOffset(offset);
 }
 
 int XbitFlasher::GetSizeForBank(int layout, int bank)
