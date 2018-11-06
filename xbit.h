@@ -155,7 +155,7 @@ private:
 	bool WriteFlash(uchar flash, uchar sector, uint16 offset, uchar *buffer, uint16 nBytes);
 	bool EraseBlock(int flash, int sector);
 
-	uchar CalculateBlocksizeForOffset(int offset);
+	uchar CalculateBlockIndexForOffset(int offset);
 	int GetStartblockForBank(int layout, int bank);
 	int GetSizeForBank(int layout, int bank);
 };
